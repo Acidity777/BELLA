@@ -1,771 +1,179 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#170d18">
-<meta name="description" content="A little birthday world made especially for Bella.">
-<title>For Bella ♡</title>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
-
-:root {
-  --bg: #170d18;
-  --panel: #291829;
-  --pink: #f4b7c9;
-  --rose: #d97999;
-  --cream: #fff4e9;
-  --muted: #c3acbc;
-  --gold: #e7c58b;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background: var(--bg);
-  color: var(--cream);
-  font-family: 'DM Sans', sans-serif;
-  line-height: 1.7;
-  overflow-x: hidden;
-}
-
-button {
-  font: inherit;
-  -webkit-tap-highlight-color: transparent;
-}
-
-button:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 4px;
-}
-
-.ambient {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse at 15% 20%, #702f5238, transparent 42%),
-    radial-gradient(ellipse at 90% 75%, #a15a6c20, transparent 40%),
-    var(--bg);
-}
-
-.opening {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  display: grid;
-  place-items: center;
-  padding: 24px;
-  text-align: center;
-  background: radial-gradient(ellipse at center, #42233d, #170d18 75%);
-  opacity: 1;
-  visibility: visible;
-  transition: opacity .8s ease, visibility .8s ease;
-}
-
-.opening.hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.opening-content {
-  width: min(100%, 440px);
-  animation: rise 1s ease both;
-}
-
-.eyebrow {
-  color: var(--gold);
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  font-size: 10px;
-}
-
-.envelope {
-  width: 110px;
-  height: 85px;
-  margin: 35px auto;
-  display: grid;
-  place-items: center;
-  border: 1px solid #e7c58b77;
-  border-radius: 6px;
-  background: #d9799920;
-  box-shadow: 0 0 55px #d9799920;
-  animation: float 3s ease-in-out infinite;
-}
-
-.envelope span {
-  font-size: 42px;
-}
-
-h1, h2, h3, .serif {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 500;
-}
-
-.opening h1 {
-  font-size: clamp(54px, 12vw, 78px);
-  line-height: 1;
-  margin: 24px 0;
-}
-
-.opening h1 em {
-  display: block;
-  color: var(--pink);
-}
-
-.opening p {
-  color: var(--muted);
-  font-size: 13px;
-  margin: 20px auto 30px;
-  max-width: 300px;
-}
-
-.button {
-  display: inline-block;
-  border: 1px solid #e7c58b88;
-  border-radius: 999px;
-  padding: 14px 26px;
-  background: linear-gradient(135deg, #d97999, #a94f74);
-  color: white;
-  cursor: pointer;
-  box-shadow: 0 8px 30px #d9799925;
-  transition: transform .25s, box-shadow .25s;
-}
-
-.button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 35px #d9799940;
-}
-
-@keyframes rise {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0) rotate(-2deg); }
-  50% { transform: translateY(-10px) rotate(2deg); }
-}
-
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px clamp(18px, 6vw, 70px);
-  border-bottom: 1px solid #ffffff10;
-}
-
-.brand {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 23px;
-}
-
-.brand span {
-  color: var(--pink);
-}
-
-.music-button {
-  background: #ffffff08;
-  border: 1px solid #ffffff25;
-  border-radius: 999px;
-  color: var(--cream);
-  padding: 9px 14px;
-  cursor: pointer;
-  font-size: 12px;
-}
-
-main {
-  width: min(100% - 36px, 960px);
-  margin: auto;
-}
-
-section {
-  padding: 90px 0;
-  scroll-margin-top: 20px;
-}
-
-.hero {
-  min-height: 650px;
-  display: grid;
-  align-content: center;
-  text-align: center;
-}
-
-.hero h2 {
-  font-size: clamp(58px, 13vw, 110px);
-  line-height: .98;
-  margin: 25px 0;
-}
-
-.hero h2 span {
-  display: block;
-  color: var(--pink);
-  font-style: italic;
-}
-
-.hero-copy {
-  max-width: 470px;
-  margin: auto;
-  color: var(--muted);
-  font-size: 14px;
-}
-
-.hero .button {
-  margin-top: 30px;
-}
-
-.scroll-note {
-  margin-top: 55px;
-  color: #c3acbc80;
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-}
-
-.section-heading {
-  text-align: center;
-  margin-bottom: 38px;
-}
-
-.section-heading h2 {
-  font-size: clamp(40px, 8vw, 65px);
-  line-height: 1.1;
-  margin-top: 14px;
-}
-
-.section-heading p {
-  color: var(--muted);
-  font-size: 13px;
-  margin-top: 12px;
-}
-
-.gift-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
-
-.gift {
-  min-height: 200px;
-  background: linear-gradient(145deg, #ffffff0b, #ffffff03);
-  border: 1px solid #ffffff15;
-  border-radius: 14px;
-  color: var(--cream);
-  padding: 22px 12px;
-  cursor: pointer;
-  transition: .3s ease;
-}
-
-.gift:hover {
-  border-color: #f4b7c977;
-  transform: translateY(-5px);
-  background: #d9799910;
-}
-
-.gift-icon {
-  display: block;
-  font-size: 38px;
-  margin-bottom: 12px;
-}
-
-.gift strong {
-  display: block;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 24px;
-  font-weight: 500;
-}
-
-.gift small {
-  color: var(--muted);
-  font-size: 11px;
-}
-
-.reveal {
-  display: none;
-  margin: 25px auto 0;
-  max-width: 550px;
-  text-align: center;
-  padding: 28px;
-  border: 1px solid #f4b7c944;
-  border-radius: 14px;
-  background: #ffffff08;
-}
-
-.reveal.show {
-  display: block;
-  animation: rise .5s ease both;
-}
-
-.reveal h3 {
-  color: var(--pink);
-  font-size: 30px;
-  margin-bottom: 10px;
-}
-
-.reveal p {
-  color: var(--muted);
-  font-size: 14px;
-}
-
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-}
-
-.photo-card {
-  min-height: 240px;
-  position: relative;
-  overflow: hidden;
-  border-radius: 12px;
-  border: 1px solid #ffffff14;
-  background: radial-gradient(ellipse at 50% 35%, #75405c, #211524);
-  display: grid;
-  place-items: center;
-  text-align: center;
-  padding: 15px;
-}
-
-.photo-card img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.placeholder {
-  color: #fff0f4cc;
-}
-
-.placeholder span {
-  display: block;
-  font-size: 36px;
-  margin-bottom: 10px;
-}
-
-.placeholder p {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-}
-
-.gallery-caption {
-  text-align: center;
-  color: var(--muted);
-  font-size: 12px;
-  margin-top: 18px;
-}
-
-.message-list {
-  display: grid;
-  gap: 12px;
-  max-width: 650px;
-  margin: auto;
-}
-
-.message-card {
-  width: 100%;
-  padding: 22px;
-  text-align: left;
-  background: #ffffff06;
-  color: var(--cream);
-  border: 1px solid #ffffff15;
-  border-radius: 12px;
-  cursor: pointer;
-}
-
-.question {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 24px;
-}
-
-.answer {
-  display: none;
-  color: var(--muted);
-  font-size: 14px;
-  margin-top: 14px;
-}
-
-.message-card.open .answer {
-  display: block;
-  animation: rise .4s ease both;
-}
-
-.plus {
-  color: var(--pink);
-  font-size: 24px;
-}
-
-.letter-wrap {
-  max-width: 650px;
-  margin: auto;
-  padding: clamp(25px, 7vw, 55px);
-  border: 1px solid #e7c58b55;
-  background: linear-gradient(145deg, #ffffff09, #d9799908);
-  border-radius: 5px;
-}
-
-.letter-wrap h3 {
-  font-size: 40px;
-  color: var(--pink);
-  margin: 15px 0 20px;
-}
-
-.letter-wrap p {
-  color: #eadbe4;
-  font-size: 14px;
-  margin: 14px 0;
-}
-
-.signature {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 27px !important;
-  color: var(--pink) !important;
-  margin-top: 30px !important;
-}
-
-.footer {
-  padding: 35px 15px 45px;
-  text-align: center;
-  border-top: 1px solid #ffffff10;
-  color: #c3acbc99;
-  font-size: 11px;
-}
-
-.footer span {
-  color: var(--pink);
-}
-
-.floating-heart {
-  position: fixed;
-  bottom: -40px;
-  pointer-events: none;
-  z-index: 1100;
-  animation: heartRise linear forwards;
-}
-
-@keyframes heartRise {
-  to {
-    transform: translateY(-110vh) rotate(35deg);
-    opacity: 0;
-  }
-}
-
-@media (max-width: 600px) {
-  section { padding: 70px 0; }
-  .hero { min-height: 590px; }
-  .gift-grid { grid-template-columns: 1fr; }
-  .gift { min-height: 145px; }
-  .photo-card { min-height: 175px; }
-  .question { font-size: 21px; }
-  .topbar { padding: 17px 15px; }
-  .brand { font-size: 20px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    scroll-behavior: auto !important;
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
-  }
-}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#160c1d">
+  <meta name="description" content="A little universe made especially for Bella.">
+  <title>For Bella ♡</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap');
+    :root{--night:#160c1d;--plum:#28122e;--wine:#56243e;--rose:#f3a6ba;--cream:#fff4e9;--gold:#e8c58a;--muted:#cbb9c8;--glass:rgba(255,244,233,.07);--line:rgba(255,244,233,.15)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--night);color:var(--cream);font-family:'DM Sans',sans-serif;min-height:100vh}button,a{font:inherit}button{cursor:pointer}a{color:inherit}button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+    .sky{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0;background:radial-gradient(ellipse at 12% 15%,rgba(115,48,91,.27),transparent 40%),radial-gradient(ellipse at 88% 72%,rgba(78,48,104,.28),transparent 38%),linear-gradient(145deg,#160c1d,#1c1026 58%,#100a18)}
+    .sky:before,.sky:after{content:'';position:absolute;inset:-15%;background-image:radial-gradient(1px 1px at 12% 17%,#fff 95%,transparent),radial-gradient(2px 2px at 73% 12%,#e8c58a 95%,transparent),radial-gradient(1px 1px at 56% 43%,#fff 95%,transparent),radial-gradient(1px 1px at 87% 63%,#fff 95%,transparent),radial-gradient(2px 2px at 24% 76%,#f3a6ba 95%,transparent),radial-gradient(1px 1px at 44% 89%,#fff 95%,transparent),radial-gradient(1px 1px at 92% 28%,#fff 95%,transparent),radial-gradient(1px 1px at 8% 52%,#fff 95%,transparent);background-size:370px 310px;opacity:.65;animation:drift 65s linear infinite}.sky:after{background-position:110px 70px;opacity:.28;transform:scale(1.4);animation-duration:95s}@keyframes drift{to{transform:translateY(-30px) translateX(18px)}}
+    .app{position:relative;z-index:1;min-height:100vh}.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px clamp(16px,4vw,44px);background:rgba(22,12,29,.78);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.08)}.brand{font-family:'Playfair Display',serif;font-size:1.15rem;letter-spacing:.02em}.brand span{color:var(--rose)}.top-actions{display:flex;align-items:center;gap:9px}.pill{border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--cream);border-radius:999px;padding:9px 13px;font-size:.78rem}.pill:hover{background:rgba(255,255,255,.12)}
+    .view{display:none;min-height:calc(100vh - 56px);padding:clamp(28px,5vw,64px) 18px 70px;animation:appear .7s ease both}.view.active{display:block}@keyframes appear{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}.wrap{width:min(1050px,100%);margin:auto}.eyebrow{text-transform:uppercase;letter-spacing:.24em;font-size:.7rem;color:var(--gold);font-weight:700}.serif{font-family:'Playfair Display',serif}.title{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,7vw,5.6rem);font-weight:500;line-height:1.02;letter-spacing:-.04em;margin:15px 0 20px}.title em{color:var(--rose);font-weight:500}.lead{color:var(--muted);font-size:clamp(1rem,2.3vw,1.18rem);line-height:1.8;max-width:650px}.center{text-align:center}.center .lead{margin-left:auto;margin-right:auto}.btn{border:0;border-radius:999px;padding:14px 21px;background:var(--cream);color:#281326;font-weight:700;box-shadow:0 9px 30px rgba(0,0,0,.18);transition:transform .2s,box-shadow .2s}.btn:hover{transform:translateY(-2px);box-shadow:0 12px 35px rgba(0,0,0,.25)}.btn.secondary{background:transparent;border:1px solid var(--line);box-shadow:none;color:var(--cream)}.btn.rose{background:var(--rose);color:#291222}.actions{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:28px}.fine{font-size:.8rem;color:#a993aa;line-height:1.7}
+    /* countdown */
+    #lockView{display:grid;place-items:center;text-align:center}.lock-card{width:min(720px,100%);padding:clamp(24px,5vw,52px);border:1px solid var(--line);border-radius:32px;background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025));box-shadow:0 28px 90px rgba(0,0,0,.24)}.clock{width:190px;height:190px;border-radius:50%;border:1px solid rgba(232,197,138,.7);margin:28px auto 30px;position:relative;background:radial-gradient(circle at 50% 50%,rgba(243,166,186,.1),rgba(255,255,255,.015) 65%);box-shadow:0 0 0 8px rgba(232,197,138,.035),0 0 50px rgba(243,166,186,.08)}.clock:before{content:'✦';position:absolute;top:12px;left:calc(50% - 5px);font-size:10px;color:var(--gold)}.clock .num{position:absolute;font-size:.72rem;color:var(--gold);transform:translate(-50%,-50%)}.hand{position:absolute;left:50%;bottom:50%;transform-origin:50% 100%;border-radius:99px;transform:translateX(-50%) rotate(0deg)}.hour{width:4px;height:49px;background:var(--cream)}.minute{width:3px;height:67px;background:var(--rose)}.second{width:1.5px;height:73px;background:var(--gold)}.hub{position:absolute;width:9px;height:9px;background:var(--cream);border-radius:50%;top:calc(50% - 4.5px);left:calc(50% - 4.5px)}.countdown{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:25px 0}.timebox{min-width:74px;padding:13px 10px;border-radius:16px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09)}.timebox strong{display:block;font-size:1.55rem;font-family:'Playfair Display',serif;font-weight:500}.timebox span{display:block;font-size:.65rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-top:3px}
+    /* entrance */
+    .hero{min-height:75vh;display:grid;place-items:center;text-align:center}.hero-inner{max-width:800px}.orb{width:94px;height:94px;border:1px solid rgba(232,197,138,.65);border-radius:50%;margin:0 auto 26px;display:grid;place-items:center;font-size:2rem;color:var(--rose);box-shadow:0 0 0 12px rgba(232,197,138,.04),0 0 60px rgba(243,166,186,.12);animation:pulse 3s ease-in-out infinite}@keyframes pulse{50%{box-shadow:0 0 0 20px rgba(232,197,138,.02),0 0 80px rgba(243,166,186,.18)}}
+    .chapter-nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:26px 0 40px}.chapter-nav button{border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--muted);border-radius:999px;padding:9px 13px;font-size:.78rem}.chapter-nav button:hover,.chapter-nav button.current{background:rgba(243,166,186,.14);border-color:rgba(243,166,186,.5);color:var(--cream)}
+    .section-head{margin-bottom:30px}.section-head .title{font-size:clamp(2.4rem,6vw,4.2rem)}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.card{position:relative;padding:24px;border-radius:22px;border:1px solid var(--line);background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025));min-height:190px;overflow:hidden}.card:after{content:'✧';position:absolute;right:18px;top:10px;font-size:2.2rem;color:rgba(243,166,186,.28)}.card h3{font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:500;margin:12px 0}.card p{color:var(--muted);line-height:1.7;font-size:.92rem}.icon{font-size:1.4rem;color:var(--rose)}.text-card{padding:clamp(24px,5vw,45px);border-radius:26px;border:1px solid var(--line);background:rgba(255,255,255,.045);max-width:780px;margin:0 auto}.text-card p{color:#f0dfe9;line-height:1.95;font-size:1.05rem}.quote{font-family:'Playfair Display',serif;font-size:clamp(1.45rem,3.8vw,2.2rem);line-height:1.45;color:var(--cream)}
+    /* gallery */
+    .gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.photo{padding:10px 10px 18px;background:#f6e7d7;color:#392334;transform:rotate(var(--tilt, -1deg));box-shadow:0 12px 35px rgba(0,0,0,.25);transition:transform .25s;cursor:pointer;border:0;text-align:left}.photo:hover{transform:rotate(0deg) translateY(-5px) scale(1.015)}.photo-frame{height:220px;background:linear-gradient(145deg,#4a2547,#a45c78);display:grid;place-items:center;overflow:hidden}.photo-frame img{width:100%;height:100%;object-fit:cover;display:block}.photo-frame .placeholder{padding:18px;text-align:center;color:#fff5ed;font-family:'Playfair Display',serif;font-size:1.15rem;line-height:1.4}.photo-caption{font-family:'Playfair Display',serif;font-size:1.05rem;margin:13px 4px 0}.photo small{display:block;margin:4px 4px 0;color:#765d6d;font-size:.7rem}.gallery-note{border:1px dashed rgba(232,197,138,.5);padding:18px;border-radius:16px;color:var(--muted);line-height:1.7;margin-top:22px;font-size:.85rem}
+    /* surprise */
+    .gift-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.gift{border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--cream);border-radius:22px;padding:28px 18px;min-height:180px;text-align:center;transition:.25s}.gift:hover{background:rgba(243,166,186,.09);transform:translateY(-4px)}.gift .gift-icon{font-size:2.5rem;display:block;margin-bottom:14px}.gift strong{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:500}.gift small{display:block;color:var(--muted);margin-top:9px}
+    /* distance / stars */
+    .night-map{height:260px;border:1px solid var(--line);border-radius:25px;position:relative;overflow:hidden;margin:28px 0;background:radial-gradient(ellipse at 20% 30%,rgba(243,166,186,.13),transparent 35%),radial-gradient(ellipse at 80% 70%,rgba(232,197,138,.12),transparent 35%),rgba(255,255,255,.025)}.night-map:before{content:'';position:absolute;left:15%;right:15%;top:50%;border-top:1px dashed rgba(232,197,138,.65);transform:rotate(-9deg)}.point{position:absolute;top:45%;width:14px;height:14px;border-radius:50%;background:var(--rose);box-shadow:0 0 0 8px rgba(243,166,186,.1),0 0 30px var(--rose)}.point.one{left:15%}.point.two{right:15%;top:54%;background:var(--gold);box-shadow:0 0 0 8px rgba(232,197,138,.1),0 0 30px var(--gold)}.point-label{position:absolute;font-size:.8rem;color:var(--cream)}.point-label.one{left:12%;top:34%}.point-label.two{right:11%;top:64%}.travelling-heart{position:absolute;top:calc(50% - 14px);left:20%;font-size:1.3rem;animation:travel 6s ease-in-out infinite alternate}@keyframes travel{to{left:77%;top:48%}}
+    .stars-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.star{min-height:130px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.035);color:var(--gold);font-size:2rem;transition:.2s}.star:hover{transform:translateY(-4px);background:rgba(232,197,138,.09)}.star span{display:block;font-size:.72rem;letter-spacing:.05em;color:var(--muted);margin-top:9px}
+    /* letter */
+    .envelope-wrap{display:grid;place-items:center;margin:28px auto;min-height:220px}.envelope{position:relative;width:min(310px,85vw);height:180px;background:#b56d89;border-radius:8px;box-shadow:0 20px 55px rgba(0,0,0,.25);cursor:pointer;border:0;overflow:visible}.envelope:before{content:'';position:absolute;inset:0;background:#d18ba4;clip-path:polygon(0 0,50% 55%,100% 0);z-index:2;transition:transform .7s;transform-origin:top}.envelope:after{content:'♡';position:absolute;left:calc(50% - 18px);top:58px;font-size:2rem;color:#fff1e6;z-index:3}.envelope.open:before{transform:rotateX(180deg);z-index:0}.envelope-label{position:absolute;inset:0;display:grid;place-items:center;color:#fff1e6;font-family:'Playfair Display',serif;font-size:1.15rem;z-index:1}.letter-content{display:none;text-align:left;max-width:760px;margin:0 auto;padding:clamp(24px,5vw,45px);border:1px solid rgba(232,197,138,.35);border-radius:24px;background:rgba(255,244,233,.06);line-height:1.95;color:#f4e6ee;white-space:pre-line}.letter-content.show{display:block;animation:appear .7s ease both}.letter-content h3{font-family:'Playfair Display',serif;color:var(--gold);font-size:2rem;font-weight:500}
+    /* audio */
+    .voice-box{max-width:640px;margin:28px auto;padding:25px;border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.045)}audio{width:100%;margin:15px 0} .music-panel{max-width:720px;margin:26px auto;padding:22px;border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.045)}.track-list{display:grid;gap:9px;margin:18px 0}.track{display:flex;align-items:center;gap:12px;padding:13px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);border-radius:14px;color:var(--cream);text-align:left}.track.active{border-color:rgba(243,166,186,.65);background:rgba(243,166,186,.09)}.track .track-no{color:var(--gold);font-family:'Playfair Display',serif}.track small{display:block;color:var(--muted);margin-top:3px}.music-frame{width:100%;aspect-ratio:16/9;border:0;border-radius:14px;background:#0d0812}.audio-hint{font-size:.8rem;line-height:1.7;color:var(--muted)}
+    .footer{text-align:center;padding:25px 18px 40px;color:#927e95;font-size:.78rem}.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#fff4e9;color:#291326;padding:14px 18px;border-radius:16px;max-width:min(500px,90vw);box-shadow:0 15px 50px #0005;z-index:50;transition:.25s;line-height:1.5}.toast.show{opacity:1;transform:translate(-50%,0)}.modal{position:fixed;inset:0;display:none;place-items:center;background:rgba(8,4,12,.82);backdrop-filter:blur(10px);z-index:40;padding:20px}.modal.show{display:grid}.modal-card{max-width:560px;width:100%;padding:30px;border:1px solid var(--line);border-radius:24px;background:#24132b;text-align:center}.modal-card p{color:var(--muted);line-height:1.8}.modal-close{float:right;border:1px solid var(--line);background:transparent;color:var(--cream);border-radius:50%;width:34px;height:34px}
+    @media(max-width:760px){.grid,.gallery,.gift-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.stars-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.photo-frame{height:180px}.topbar{padding:12px 14px}.brand{font-size:1rem}.pill{padding:8px 10px;font-size:.72rem}}
+    @media(max-width:480px){.grid,.gallery,.gift-grid{grid-template-columns:1fr}.photo-frame{height:250px}.clock{width:168px;height:168px}.hour{height:43px}.minute{height:59px}.second{height:64px}.topbar{flex-wrap:wrap}.top-actions{margin-left:auto}.view{padding-top:28px}.card{min-height:150px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+  </style>
 </head>
-
 <body>
-<div class="ambient"></div>
+<div class="sky" aria-hidden="true"></div>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">a little world for <span>Bella ♡</span></div>
+    <div class="top-actions"><button class="pill" id="musicShortcut" type="button" onclick="go('musicView')">♫ Soundtrack</button><button class="pill" id="homeShortcut" type="button" onclick="go('homeView')">Home ↗</button></div>
+  </header>
 
-<div class="opening" id="opening">
-  <div class="opening-content">
-    <div class="eyebrow">A little something, just for you</div>
-    <div class="envelope"><span>💌</span></div>
-    <h1>For you,<em>Bella.</em></h1>
-    <p>Some things are too special to fit inside an ordinary birthday message.</p>
+  <main>
+    <section class="view active" id="lockView">
+      <div class="lock-card">
+        <div class="eyebrow">a little something is on its way</div>
+        <div class="clock" id="clock" aria-label="An analogue clock counting down to Bella's birthday">
+          <span class="num" style="left:50%;top:12%">12</span><span class="num" style="left:72%;top:17%">1</span><span class="num" style="left:84%;top:31%">2</span><span class="num" style="left:88%;top:50%">3</span><span class="num" style="left:83%;top:70%">4</span><span class="num" style="left:70%;top:84%">5</span><span class="num" style="left:50%;top:89%">6</span><span class="num" style="left:30%;top:84%">7</span><span class="num" style="left:17%;top:70%">8</span><span class="num" style="left:12%;top:50%">9</span><span class="num" style="left:17%;top:31%">10</span><span class="num" style="left:29%;top:17%">11</span>
+          <span class="hand hour" id="hourHand"></span><span class="hand minute" id="minuteHand"></span><span class="hand second" id="secondHand"></span><span class="hub"></span>
+        </div>
+        <h1 class="title" style="font-size:clamp(2.4rem,6vw,4rem)">Not just yet, <em>Bella.</em></h1>
+        <p class="lead" style="margin:0 auto">Some things are worth waiting for. Your little world is being kept safe until your day arrives.</p>
+        <div class="countdown" aria-live="polite"><div class="timebox"><strong id="days">--</strong><span>days</span></div><div class="timebox"><strong id="hours">--</strong><span>hours</span></div><div class="timebox"><strong id="minutes">--</strong><span>minutes</span></div><div class="timebox"><strong id="seconds">--</strong><span>seconds</span></div></div>
+        <p class="fine">Unlocks at midnight · 19 October 2026 · Nigeria time (WAT)</p>
+        <p class="fine" id="lockNote">Until then, this little universe is waiting for its main character. ✦</p>
+      </div>
+    </section>
 
-    <!-- The inline action opens the page directly. -->
-    <button class="button" id="enterButton"
-      onclick="document.getElementById('opening').classList.add('hidden'); document.body.style.overflowX='hidden'; window.setTimeout(function(){document.getElementById('home').scrollIntoView({behavior:'smooth'});},100);">
-      Open your surprise ♡
-    </button>
-  </div>
+    <section class="view" id="homeView">
+      <div class="wrap hero"><div class="hero-inner"><div class="orb">♡</div><div class="eyebrow">chapter 01 · the beginning</div><h1 class="title">For you, <em>Bella.</em></h1><p class="lead" style="margin:auto">You somehow found your way past all my walls, and this little corner of the internet is my way of making you smile. Take your time. There are a few things here I made just for you.</p><div class="actions"><button class="btn rose" onclick="go('voiceView')">Begin your little world ♡</button><button class="btn secondary" onclick="go('worldView')">Let me look around</button></div><p class="fine" style="margin-top:26px">Made with thought, a little courage, and a whole lot of care.</p></div></div>
+    </section>
+
+    <section class="view" id="voiceView">
+      <div class="wrap center"><div class="section-head"><div class="eyebrow">before the music · a message from me</div><h1 class="title">First, hear <em>my voice.</em></h1><p class="lead">Before you explore everything, I wanted you to hear this from me instead of just reading words on a screen.</p></div>
+        <div class="voice-box"><div class="orb" style="width:66px;height:66px;font-size:1.5rem;margin-bottom:14px">♫</div><h3 class="serif" style="font-size:1.6rem;font-weight:500">A little message from me to you</h3><p class="fine">Put your headphones on if you want, get comfortable, and tap play whenever you're ready.</p><audio id="voiceAudio" controls preload="metadata"><source src="assets/bella-voice-note.mp3" type="audio/mpeg">Your browser does not support audio.</audio><p id="voiceStatus" class="audio-hint">The voice note will appear here once I add my recording. ♡</p><div class="actions" style="margin-top:14px"><button class="btn rose" onclick="go('musicView')">Okay, let the music play 🎧</button><button class="btn secondary" onclick="go('worldView')">Explore first</button></div></div>
+      </div>
+    </section>
+
+    <section class="view" id="worldView">
+      <div class="wrap"><div class="section-head"><div class="eyebrow">chapter 02 · her little world</div><h1 class="title">A few things I hope <em>you know.</em></h1><p class="lead">Not every important thing needs a grand speech. Sometimes it's just a few honest reminders, saved somewhere you can come back to.</p></div><div class="grid">
+        <article class="card"><div class="icon">✦</div><h3>A Little Wish</h3><p>I hope this next year brings you moments that make you proud of yourself, people who show up for you, and reasons to laugh when you least expect them.</p></article>
+        <article class="card"><div class="icon">♡</div><h3>A Little Reminder</h3><p>Your confidence is one of the things I appreciate about you. You had the courage to approach someone who wasn't exactly making it easy, and you kept being yourself.</p></article>
+        <article class="card"><div class="icon">☾</div><h3>A Little Secret</h3><p>I'm not always the easiest person to get close to. So the fact that you kept showing up, got to know me, and brought your energy into my world means more than I probably say.</p></article>
+      </div><div class="actions"><button class="btn rose" onclick="go('galleryView')">Visit the Bella Museum ↗</button><button class="btn secondary" onclick="go('surpriseView')">Find a little surprise</button></div></div>
+    </section>
+
+    <section class="view" id="galleryView">
+      <div class="wrap"><div class="section-head"><div class="eyebrow">chapter 03 · the bella museum</div><h1 class="title">The <em>Bella</em> collection.</h1><p class="lead">A tiny museum for the main character. The pictures will make this part feel even more like you — for now, these frames are waiting for your favourite moments.</p></div>
+        <div class="gallery" id="galleryGrid">
+          <button class="photo" style="--tilt:-2deg" onclick="showPhotoNote('The Main Character','A picture that feels completely, unmistakably you.')"><div class="photo-frame"><div class="placeholder">your favourite<br>bella picture goes here ♡</div></div><div class="photo-caption">The Main Character</div><small>the bella collection · 01</small></button>
+          <button class="photo" style="--tilt:1.5deg" onclick="showPhotoNote('That Smile','The kind of picture that deserves to be kept.')"><div class="photo-frame" style="background:linear-gradient(145deg,#7b405c,#e4a0b5)"><div class="placeholder">a smile worth<br>keeping ✦</div></div><div class="photo-caption">That Smile</div><small>the bella collection · 02</small></button>
+          <button class="photo" style="--tilt:-1deg" onclick="showPhotoNote('A Little Moment','One of those ordinary moments that becomes a favourite.')"><div class="photo-frame" style="background:linear-gradient(145deg,#4a315f,#bd91b0)"><div class="placeholder">a little moment<br>in time ☾</div></div><div class="photo-caption">A Little Moment</div><small>the bella collection · 03</small></button>
+          <button class="photo" style="--tilt:1deg" onclick="showPhotoNote('Her Energy','The energy you bring is part of what makes you, you.')"><div class="photo-frame" style="background:linear-gradient(145deg,#8a4b58,#e9bb8e)"><div class="placeholder">her energy<br>in one frame ✨</div></div><div class="photo-caption">Her Energy</div><small>the bella collection · 04</small></button>
+          <button class="photo" style="--tilt:-1.5deg" onclick="showPhotoNote('A Picture I Love','This space is saved for a picture that means something to you.')"><div class="photo-frame" style="background:linear-gradient(145deg,#332447,#a35c81)"><div class="placeholder">one I'll always<br>want to remember ♡</div></div><div class="photo-caption">A Picture I Love</div><small>the bella collection · 05</small></button>
+          <button class="photo" style="--tilt:2deg" onclick="showPhotoNote('More to Come','This little museum can keep growing whenever you want.')"><div class="photo-frame" style="background:linear-gradient(145deg,#62415c,#e0a5a8)"><div class="placeholder">to be continued...<br>♡</div></div><div class="photo-caption">More to Come</div><small>the bella collection · 06</small></button>
+        </div>
+        <div class="gallery-note"><strong style="color:var(--gold)">For us, while building:</strong> when you're ready, put Bella's photos inside a folder called <code>assets/photos</code> in the GitHub repository. I'll help you replace these six placeholders with the real pictures and captions, one step at a time.</div>
+        <div class="actions"><button class="btn rose" onclick="go('surpriseView')">There's more ↗</button><button class="btn secondary" onclick="go('worldView')">Back</button></div>
+      </div>
+    </section>
+
+    <section class="view" id="surpriseView">
+      <div class="wrap"><div class="section-head"><div class="eyebrow">chapter 04 · the surprise room</div><h1 class="title">Pick a little <em>gift.</em></h1><p class="lead">No wrapping paper needed. Choose one — each opens a small message, made to remind you that this page wasn't thrown together without thought.</p></div><div class="gift-grid">
+        <button class="gift" onclick="openGift('For your confidence','I hope you never feel like you have to shrink yourself to make other people comfortable. Your confidence is one of the first things I noticed about you — keep that light.')"><span class="gift-icon">🎁</span><strong>For your confidence</strong><small>open your gift</small></button>
+        <button class="gift" onclick="openGift('For your energy','You brought a kind of energy that made getting to know you feel different. You kept showing up even when my replies were rough around the edges. I see that, and I appreciate it.')"><span class="gift-icon">💌</span><strong>For your energy</strong><small>open your gift</small></button>
+        <button class="gift" onclick="openGift('For the days you forget','On the days you don't feel as bright, I hope you remember that you still deserve kindness, patience, and people who make room for the real you.')"><span class="gift-icon">🌷</span><strong>For a difficult day</strong><small>open your gift</small></button>
+      </div><div class="actions"><button class="btn rose" onclick="go('distanceView')">A little thing about distance ↗</button></div></div>
+    </section>
+
+    <section class="view" id="distanceView">
+      <div class="wrap center"><div class="section-head"><div class="eyebrow">chapter 05 · until we meet</div><h1 class="title">Different places.<br><em>One little connection.</em></h1><p class="lead">Even when two people aren't in the same place, a kind message, a laugh, or a little effort can still travel a long way.</p></div><div class="night-map" aria-label="Two glowing points connected across a night sky"><span class="point one"></span><span class="point two"></span><span class="point-label one">here ✦</span><span class="point-label two">there ♡</span><span class="travelling-heart">♡</span></div><div class="text-card"><p class="quote">“I hope one day we get to laugh about the little things in person — not just through a screen.”</p><p>Until then, let this page be one small reminder that distance doesn't have to make every moment feel far away.</p></div><div class="actions"><button class="btn rose" onclick="go('starsView')">Make a wish under the stars ✦</button></div></div>
+    </section>
+
+    <section class="view" id="starsView">
+      <div class="wrap center"><div class="section-head"><div class="eyebrow">chapter 06 · her little universe</div><h1 class="title">Choose a <em>star.</em></h1><p class="lead">Every star is holding a small wish for your next chapter. Tap any one and see what it has for you.</p></div><div class="stars-grid">
+        <button class="star" onclick="openGift('Star 01 · joy','May your year be filled with the kind of happiness that arrives naturally, without you having to force it. ✨')">✦<span>for joy</span></button>
+        <button class="star" onclick="openGift('Star 02 · courage','May you keep trusting yourself, taking up space, and being brave enough to be seen as you really are. ♡')">✧<span>for courage</span></button>
+        <button class="star" onclick="openGift('Star 03 · peace','May your mind get quiet when you need rest, and may your heart feel safe around the people you choose. ☾')">✦<span>for peace</span></button>
+        <button class="star" onclick="openGift('Star 04 · good people','May you keep finding people who match your effort, celebrate your wins, and treat your heart with care. ✨')">✧<span>for good people</span></button>
+        <button class="star" onclick="openGift('Star 05 · dreams','May you get closer to the things you dream about, one small brave step at a time. ♡')">✦<span>for your dreams</span></button>
+        <button class="star" onclick="openGift('Star 06 · laughter','May life give you so many reasons to laugh that even the difficult days don't get the final word. 🌷')">✧<span>for laughter</span></button>
+        <button class="star" onclick="openGift('Star 07 · self-love','May you speak to yourself with the same patience and kindness you give to the people you care about. ☾')">✦<span>for yourself</span></button>
+        <button class="star" onclick="openGift('Star 08 · your new year','Happy birthday, Bella. May this next chapter surprise you in the loveliest ways. ♡')">✧<span>for your new year</span></button>
+      </div><div class="actions"><button class="btn rose" onclick="go('letterView')">One last thing… 💌</button></div></div>
+    </section>
+
+    <section class="view" id="letterView">
+      <div class="wrap center"><div class="section-head"><div class="eyebrow">chapter 07 · the final letter</div><h1 class="title">A letter, just <em>for you.</em></h1><p class="lead">This is the last little door. Open it when you're ready.</p></div><div class="envelope-wrap"><button class="envelope" id="envelope" onclick="toggleLetter()" aria-label="Open the birthday letter"><span class="envelope-label">For Bella, with care ♡</span></button></div><article class="letter-content" id="letterContent"><h3>Dear Bella,</h3><p>Happy birthday, Bella. ♡</p><p>I wanted to make you something that felt like you deserved a little time and thought — something you could open, explore, smile at, and maybe come back to whenever you feel like it.</p><p>One thing I genuinely appreciate about you is your confidence. And your energy towards me, honestly. It isn't easy getting through to me. I know I can be rude, and I know some of my replies before we became friends probably didn't make it easy for you. You had been noticing me since March, and somehow, around May or June, you found a way for us to actually get to know each other.</p><p>That takes a kind of boldness I respect. You didn't have to keep trying to know someone who wasn't exactly making the door easy to open, but you did. And I'm glad you did. I might not always be the best at saying things in the moment, but I do notice your effort, your confidence, and the energy you bring when you're talking to me.</p><p>I hope this new year of your life brings you reasons to be proud of yourself, people who meet your effort with their own, beautiful memories, and the kind of happiness that stays even after the birthday candles are gone. I hope you keep being confidently, wonderfully you.</p><p>And if this little website makes you smile even once, then it has already done what I hoped it would do. I made it because I wanted to give you something personal — not because it had to be expensive or perfect, but because you matter enough for me to try.</p><p>Happy birthday, Bella. Keep your confidence. Keep your energy. Keep being you. And thank you for finding your way into my world. ♡</p><p style="color:var(--gold);font-family:'Playfair Display',serif;font-size:1.4rem">— from me, with care. ♡</p><p class="fine">We'll keep shaping this letter together. If there's a detail you want to add, change, or make more emotional, tell Ace and we'll make it sound like you.</p></article><div class="actions"><button class="btn rose" onclick="go('musicView')">Stay a little longer · play the music 🎧</button><button class="btn secondary" onclick="go('homeView')">Start the journey again ↺</button></div></div>
+    </section>
+
+    <section class="view" id="musicView">
+      <div class="wrap center"><div class="section-head"><div class="eyebrow">the soundtrack · three songs, one little world</div><h1 class="title">Press play, <em>birthday girl.</em></h1><p class="lead">These are the Asake songs you chose: Remember, My Heart, and Mogbe. Pick one below; the official YouTube audio will play right here.</p></div><div class="music-panel"><div id="nowPlaying" class="serif" style="font-size:1.5rem">Remember</div><p id="trackSub" class="fine">Asake · Work Of Art</p><iframe id="musicFrame" class="music-frame" src="https://www.youtube-nocookie.com/embed/MhvVRw5XTVY?rel=0" title="Asake music player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><div class="track-list">
+          <button class="track active" data-id="MhvVRw5XTVY" data-name="Remember" data-album="Asake · Work Of Art" onclick="playTrack(this)"><span class="track-no">01</span><span><strong>Remember</strong><small>Work Of Art</small></span><span style="margin-left:auto;color:var(--rose)">▶</span></button>
+          <button class="track" data-id="JLsDnyT2woc" data-name="My Heart" data-album="Asake · Lungu Boy" onclick="playTrack(this)"><span class="track-no">02</span><span><strong>My Heart</strong><small>Lungu Boy</small></span><span style="margin-left:auto;color:var(--rose)">▶</span></button>
+          <button class="track" data-id="8rdIBplBlqA" data-name="Mogbe" data-album="Asake · Work Of Art" onclick="playTrack(this)"><span class="track-no">03</span><span><strong>Mogbe</strong><small>Work Of Art</small></span><span style="margin-left:auto;color:var(--rose)">▶</span></button>
+        </div><p class="audio-hint">Music is hosted by YouTube, so playback needs an internet connection and may show YouTube controls or ads. If an embed doesn't play on a device, use the YouTube button in the player or tell me and we'll adjust it.</p></div><div class="actions"><button class="btn rose" onclick="go('letterView')">Back to the letter ♡</button><button class="btn secondary" onclick="go('homeView')">Back to the beginning</button></div></div>
+    </section>
+  </main>
+  <footer class="footer">Made for Bella ♡ · a little world that can keep growing</footer>
 </div>
-
-<header class="topbar">
-  <div class="brand">a little world <span>♡</span></div>
-  <button class="music-button" id="musicButton" type="button" aria-pressed="false">
-    ♫ Music: Off
-  </button>
-</header>
-
-<main>
-  <section class="hero" id="home">
-    <div class="eyebrow">Today is a little more beautiful</div>
-    <h2>Happy Birthday,<span>Bella.</span></h2>
-    <p class="hero-copy">
-      Today, the world gets to celebrate the day someone as special as you
-      came into it. This little corner of the internet is just for you.
-    </p>
-    <div>
-      <button class="button" id="exploreButton" type="button">
-        Explore your little world ↓
-      </button>
-    </div>
-    <div class="scroll-note">Made with a little extra love</div>
-  </section>
-
-  <section id="gifts">
-    <div class="section-heading">
-      <div class="eyebrow">Three little surprises</div>
-      <h2>Something for you</h2>
-      <p>Go on, Bella. Pick a gift. They're waiting for you.</p>
-    </div>
-
-    <div class="gift-grid">
-      <button class="gift" type="button" data-gift="1">
-        <span class="gift-icon">🎁</span>
-        <strong>A little wish</strong>
-        <small>Tap to unwrap</small>
-      </button>
-      <button class="gift" type="button" data-gift="2">
-        <span class="gift-icon">🌷</span>
-        <strong>A little reminder</strong>
-        <small>Something to remember</small>
-      </button>
-      <button class="gift" type="button" data-gift="3">
-        <span class="gift-icon">💌</span>
-        <strong>A little secret</strong>
-        <small>Just between us</small>
-      </button>
-    </div>
-
-    <div class="reveal" id="giftReveal" aria-live="polite">
-      <h3 id="giftTitle">A little surprise ♡</h3>
-      <p id="giftText"></p>
-    </div>
-  </section>
-
-  <section id="memories">
-    <div class="section-heading">
-      <div class="eyebrow">Little moments, lovely memories</div>
-      <h2>A page just for you</h2>
-      <p>Our gallery will hold the photographs you choose to share.</p>
-    </div>
-
-    <div class="gallery-grid">
-      <div class="photo-card"><div class="placeholder"><span>📸</span><p>A moment to remember</p></div></div>
-      <div class="photo-card"><div class="placeholder"><span>🌸</span><p>A beautiful memory</p></div></div>
-      <div class="photo-card"><div class="placeholder"><span>✨</span><p>A little happiness</p></div></div>
-      <div class="photo-card"><div class="placeholder"><span>💗</span><p>One for the heart</p></div></div>
-    </div>
-
-    <p class="gallery-caption">These are placeholders for now. We'll add your chosen photographs later.</p>
-  </section>
-
-  <section id="messages">
-    <div class="section-heading">
-      <div class="eyebrow">In case you need to hear it</div>
-      <h2>Little things worth knowing</h2>
-      <p>Tap each message to open it.</p>
-    </div>
-
-    <div class="message-list">
-      <button class="message-card" type="button">
-        <span class="question">A reminder for your heart <span class="plus">+</span></span>
-        <span class="answer">You don't have to have everything figured out to be worthy of beautiful things. Give yourself permission to grow at your own pace.</span>
-      </button>
-
-      <button class="message-card" type="button">
-        <span class="question">For the days that feel heavy <span class="plus">+</span></span>
-        <span class="answer">I hope life gives you reasons to smile when you least expect them, people who make you feel understood, and peace that stays.</span>
-      </button>
-
-      <button class="message-card" type="button">
-        <span class="question">A birthday wish, just for you <span class="plus">+</span></span>
-        <span class="answer">May this new chapter bring you good health, genuine happiness, answered prayers, meaningful growth, and moments you'll treasure.</span>
-      </button>
-    </div>
-  </section>
-
-  <section id="letter">
-    <div class="section-heading">
-      <div class="eyebrow">Before you go</div>
-      <h2>One last little thing</h2>
-      <p>Every birthday deserves words that come from the heart.</p>
-    </div>
-
-    <div class="letter-wrap">
-      <div class="eyebrow">A letter for Bella</div>
-      <h3>Dear Bella, ♡</h3>
-      <p>Happy birthday, Bella. ❤️</p>
-      <p>I hope this new chapter of your life brings you closer to the things you've been quietly wishing for. I hope you find happiness in the little moments, strength when things get difficult, and people who appreciate you for exactly who you are.</p>
-      <p>You deserve a year filled with genuine smiles, beautiful surprises, good health, and memories that make you grateful you lived them.</p>
-      <p>This little website is just a small way of making your day feel a little different. I hope it brings a smile to your face.</p>
-      <p>Here's to another year of growing, learning, laughing, and becoming an even happier version of yourself.</p>
-      <p class="signature">With love, ♡</p>
-      <p><strong>Someone who wanted to make your day special.</strong></p>
-    </div>
-  </section>
-</main>
-
-<footer class="footer">
-  A little world made for Bella <span>♡</span><br>
-  May this year be gentle with your heart.
-</footer>
-
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" onclick="if(event.target===this)closeModal()"><div class="modal-card"><button class="modal-close" onclick="closeModal()" aria-label="Close">×</button><div class="eyebrow">a little note for you</div><h2 id="modalTitle" class="serif" style="font-size:2rem;font-weight:500;margin:18px 0 12px"></h2><p id="modalText"></p><button class="btn rose" onclick="closeModal()">Keep exploring ♡</button></div></div>
 <script>
-(function () {
-  'use strict';
-
-  function initBirthdayPage() {
-    const opening = document.getElementById('opening');
-    const enterButton = document.getElementById('enterButton');
-    const exploreButton = document.getElementById('exploreButton');
-    const giftReveal = document.getElementById('giftReveal');
-    const giftTitle = document.getElementById('giftTitle');
-    const giftText = document.getElementById('giftText');
-    const musicButton = document.getElementById('musicButton');
-
-    // Backup click handler for the opening button.
-    enterButton.addEventListener('click', function () {
-      opening.classList.add('hidden');
-      burstHearts();
-    });
-
-    exploreButton.addEventListener('click', function () {
-      document.getElementById('gifts').scrollIntoView({ behavior: 'smooth' });
-    });
-
-    const gifts = {
-      1: {
-        title: 'A wish for your new chapter 🌟',
-        text: 'May the things you pray for find their way to you, may your efforts bear beautiful fruit, and may you always have reasons to hope.'
-      },
-      2: {
-        title: 'Never forget this 🌷',
-        text: 'You matter beyond what you achieve, beyond what others think, and beyond the days when you do not feel your best. Never forget to be kind to yourself.'
-      },
-      3: {
-        title: 'A tiny secret 💌',
-        text: 'Someone took the time to build this little corner of the internet just for you. Every little detail is an invitation to smile today.'
-      }
-    };
-
-    document.querySelectorAll('.gift').forEach(function (button) {
-      button.addEventListener('click', function () {
-        const gift = gifts[button.dataset.gift];
-        if (!gift) return;
-
-        giftTitle.textContent = gift.title;
-        giftText.textContent = gift.text;
-        giftReveal.classList.add('show');
-        giftReveal.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        burstHearts();
-      });
-    });
-
-    document.querySelectorAll('.message-card').forEach(function (card) {
-      card.addEventListener('click', function () {
-        card.classList.toggle('open');
-      });
-    });
-
-    function burstHearts() {
-      const symbols = ['♡', '♥', '✦', '✨'];
-
-      for (let i = 0; i < 12; i++) {
-        const heart = document.createElement('span');
-        heart.className = 'floating-heart';
-        heart.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.fontSize = (12 + Math.random() * 18) + 'px';
-        heart.style.color = Math.random() > 0.5 ? '#f4b7c9' : '#e7c58b';
-        heart.style.animationDuration = (3 + Math.random() * 3) + 's';
-        document.body.appendChild(heart);
-        setTimeout(function () { heart.remove(); }, 6500);
-      }
-    }
-
-    // Simple synthesized melody, started only after a user tap.
-    let audioContext = null;
-    let musicPlaying = false;
-    let musicTimer = null;
-    let noteIndex = 0;
-    const melody = [261.63, 329.63, 392.00, 329.63, 293.66, 349.23, 440.00, 349.23];
-
-    function playNote() {
-      if (!audioContext || !musicPlaying) return;
-
-      const oscillator = audioContext.createOscillator();
-      const gain = audioContext.createGain();
-
-      oscillator.type = 'sine';
-      oscillator.frequency.value = melody[noteIndex % melody.length];
-      gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.025, audioContext.currentTime + 0.08);
-      gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.7);
-
-      oscillator.connect(gain);
-      gain.connect(audioContext.destination);
-      oscillator.start();
-      oscillator.stop(audioContext.currentTime + 0.75);
-      noteIndex++;
-    }
-
-    musicButton.addEventListener('click', async function () {
-      try {
-        if (!audioContext) {
-          const AudioClass = window.AudioContext || window.webkitAudioContext;
-
-          if (!AudioClass) {
-            musicButton.textContent = 'Music unavailable';
-            return;
-          }
-
-          audioContext = new AudioClass();
-        }
-
-        if (!musicPlaying) {
-          await audioContext.resume();
-          musicPlaying = true;
-          playNote();
-          musicTimer = window.setInterval(playNote, 850);
-          musicButton.textContent = '♫ Music: On';
-          musicButton.setAttribute('aria-pressed', 'true');
-        } else {
-          musicPlaying = false;
-          window.clearInterval(musicTimer);
-          await audioContext.suspend();
-          musicButton.textContent = '♫ Music: Off';
-          musicButton.setAttribute('aria-pressed', 'false');
-        }
-      } catch (error) {
-        console.error('Music could not start:', error);
-        musicButton.textContent = 'Music unavailable';
-      }
-    });
+  // Birthday midnight in Nigeria: 19 October 2026 at 00:00 WAT (UTC+1).
+  const birthday = new Date('2026-10-18T23:00:00Z');
+  // Add ?preview=1 to the URL while testing; the normal shared URL stays locked until birthday.
+  let unlocked = new URLSearchParams(window.location.search).get('preview') === '1';
+  const views = [...document.querySelectorAll('.view')];
+  function go(id){
+    if(!unlocked && id!=='lockView'){ showToast('Just a little longer, Bella. Your world unlocks on 19 October. ♡'); return; }
+    views.forEach(v=>v.classList.toggle('active',v.id===id));
+    document.querySelectorAll('.chapter-nav button').forEach(b=>b.classList.toggle('current',b.dataset.target===id));
+    window.scrollTo({top:0,behavior:'smooth'});
+    if(id==='voiceView') checkVoiceNote();
   }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initBirthdayPage);
-  } else {
-    initBirthdayPage();
+  function tickClock(){
+    const now=new Date(); const sec=now.getSeconds()+now.getMilliseconds()/1000; const min=now.getMinutes()+sec/60; const hr=(now.getHours()%12)+min/60;
+    document.getElementById('secondHand').style.transform=`translateX(-50%) rotate(${sec*6}deg)`;
+    document.getElementById('minuteHand').style.transform=`translateX(-50%) rotate(${min*6}deg)`;
+    document.getElementById('hourHand').style.transform=`translateX(-50%) rotate(${hr*30}deg)`;
   }
-})();
+  function updateCountdown(){
+    tickClock(); const now=new Date(); const diff=birthday-now;
+    if(diff<=0){
+      if(!unlocked){unlocked=true; document.getElementById('lockNote').textContent='It is your day, Bella. Your little world is ready. ♡'; go('homeView'); showToast('Happy birthday, Bella! Your little world is open. ♡');}
+      document.getElementById('days').textContent='00';document.getElementById('hours').textContent='00';document.getElementById('minutes').textContent='00';document.getElementById('seconds').textContent='00';return;
+    }
+    const s=Math.floor(diff/1000); document.getElementById('days').textContent=String(Math.floor(s/86400)).padStart(2,'0');document.getElementById('hours').textContent=String(Math.floor((s%86400)/3600)).padStart(2,'0');document.getElementById('minutes').textContent=String(Math.floor((s%3600)/60)).padStart(2,'0');document.getElementById('seconds').textContent=String(s%60).padStart(2,'0');
+  }
+  function showToast(message){const t=document.getElementById('toast');t.textContent=message;t.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove('show'),3300)}
+  function openGift(title,text){document.getElementById('modalTitle').textContent=title;document.getElementById('modalText').textContent=text;document.getElementById('modal').classList.add('show')}
+  function closeModal(){document.getElementById('modal').classList.remove('show')}
+  function showPhotoNote(title,text){openGift(title,text)}
+  function toggleLetter(){const e=document.getElementById('envelope');const c=document.getElementById('letterContent');e.classList.toggle('open');c.classList.toggle('show');if(c.classList.contains('show'))setTimeout(()=>c.scrollIntoView({behavior:'smooth',block:'start'}),180)}
+  function playTrack(button){document.querySelectorAll('.track').forEach(t=>t.classList.remove('active'));button.classList.add('active');const id=button.dataset.id;document.getElementById('nowPlaying').textContent=button.dataset.name;document.getElementById('trackSub').textContent=button.dataset.album;document.getElementById('musicFrame').src=`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;}
+  function checkVoiceNote(){const a=document.getElementById('voiceAudio');const status=document.getElementById('voiceStatus');a.addEventListener('error',()=>{status.textContent='The recording is not uploaded yet. Once we add assets/bella-voice-note.mp3 to the repository, your voice note will play here. ♡'},{once:true});}
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+  // Keep the countdown accurate, including if the page stays open across midnight.
+  updateCountdown();setInterval(updateCountdown,250);
+  // Birthday is checked using an absolute UTC instant corresponding to midnight WAT.
+  if(unlocked || new Date()>=birthday){unlocked=true;document.getElementById('lockNote').textContent='It is your day, Bella. Your little world is ready. ♡';go('homeView');}
 </script>
 </body>
 </html>
