@@ -79,7 +79,7 @@
     .kid-option{border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:15px 8px;background:rgba(255,255,255,.04);color:var(--cream);font-size:1.1rem;transition:transform .2s,border-color .2s,background .2s}
     .kid-option:hover,.kid-option.selected{transform:translateY(-3px);border-color:var(--rose);background:rgba(243,166,186,.16)}
     .kids-result{display:none;margin:22px auto 0;padding:22px;border:1px solid rgba(232,197,138,.4);border-radius:20px;background:rgba(232,197,138,.07);animation:appear .45s ease both}
-    .kids-result.show{display:block}.kids-result h3{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:500;color:var(--gold);margin:0 0 10px}.kids-result p{color:#f0dfe9;line-height:1.8;margin:0}
+    .kids-result.show{display:block}.kids-result.error{border-color:rgba(243,166,186,.55);background:rgba(243,166,186,.08)}.kids-result.error h3{color:var(--rose)}.kids-result h3{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:500;color:var(--gold);margin:0 0 10px}.kids-result p{color:#f0dfe9;line-height:1.8;margin:0}
     @media(max-width:480px){.kids-options{grid-template-columns:repeat(3,minmax(0,1fr))}}
 
   </style>
@@ -150,7 +150,7 @@
 
     <section class="view" id="voiceView">
       <div class="wrap center"><div class="section-head"><div class="eyebrow">before the music · a message from me</div><h1 class="title">First, hear <em>my voice.</em></h1><p class="lead">Before you explore everything, I wanted you to hear this from me instead of just reading words on a screen.</p></div>
-        <div class="voice-box"><div class="orb" style="width:66px;height:66px;font-size:1.5rem;margin-bottom:14px">♫</div><h3 class="serif" style="font-size:1.6rem;font-weight:500">A little message from me to you</h3><p class="fine">Put your headphones on if you want, get comfortable, and tap play whenever you're ready.</p><audio id="voiceAudio" controls preload="metadata"><source src="assets/bella-voice-note.mp3" type="audio/mpeg">Your browser does not support audio.</audio><p id="voiceStatus" class="audio-hint">The voice note will appear here once I add my recording. ♡</p><div class="actions" style="margin-top:14px"><button class="btn rose" onclick="go('musicView')">Okay, let the music play 🎧</button><button class="btn secondary" onclick="go('worldView')">Explore first</button></div></div>
+        <div class="voice-box"><div class="orb" style="width:66px;height:66px;font-size:1.5rem;margin-bottom:14px">♫</div><h3 class="serif" style="font-size:1.6rem;font-weight:500">A little message from me to you</h3><p class="fine">Put your headphones on if you want, get comfortable, and tap play whenever you're ready.</p><audio id="voiceAudio" controls preload="metadata"><source src="assets/bella.mp4" type="audio/mp4">Your browser does not support audio.</audio><p id="voiceStatus" class="audio-hint">Tap play to hear my voice note first. When it finishes, the Asake soundtrack will open next. ♡</p><div class="actions" style="margin-top:14px"><button class="btn rose" onclick="go('musicView')">Okay, let the music play 🎧</button><button class="btn secondary" onclick="go('worldView')">Explore first</button></div></div>
       </div>
     </section>
 
@@ -265,14 +265,17 @@
     const result=document.getElementById('kidsResult');
     const title=document.getElementById('kidsResultTitle');
     const text=document.getElementById('kidsResultText');
+    result.classList.remove('error');
     if(count===4){
-      title.textContent='Agreement reached! ♡';
-      text.textContent='Four little humans? Okay, I see the vision. 😂❤️ Just imagine the noise, the tiny footsteps, the laughter, and the memories. For now, we can leave it as a sweet little what-if.';
+      title.textContent='Agreement sealed! ♡🔒';
+      text.textContent='FOUR little humans?! 😂❤️ Agreement sealed, Bella! Just imagine the tiny footsteps, the noise, the laughter, and all the memories. This is our cute little imaginary agreement for now — no pressure, just a sweet thought to smile about. 🥹💗';
+      result.classList.add('show');
+      showToast('The secret answer is correct. Agreement sealed! ♡');
     }else{
-      title.textContent='Answer received, Bella ♡';
-      text.textContent=`${count} little human${count===1?'':'s'} — noted for this tiny imagination game. 😂❤️ The best part is getting to dream and laugh about it, with no pressure to decide anything today.`;
+      title.textContent='Oops… that didn’t unlock it! 🙈';
+      text.textContent=`You picked ${count}. Nice try, Bella 😂❤️ There’s a little secret answer hidden in this question. Try another number to unlock the message! Hint: think of the number Acidity secretly picked. 👀💗`;
+      result.classList.add('show','error');
     }
-    result.classList.add('show');
   }
   function revealBirthdayHug(){
     const note=document.getElementById('birthdayHugNote');
@@ -300,7 +303,7 @@
     const status=document.getElementById('voiceStatus');
     if(a.dataset.listenersAttached==='1')return;
     a.dataset.listenersAttached='1';
-    a.addEventListener('error',()=>{status.textContent='The recording could not be loaded. Check that your recording is named assets/bella-voice-note.mp3 and is uploaded to the repository. ♡'},{once:true});
+    a.addEventListener('error',()=>{status.textContent='I could not load the voice note. Please check that the file is uploaded at assets/bella.mp4 (inside the assets folder) and that the filename matches exactly, including capital letters. ♡'},{once:true});
     a.addEventListener('ended',()=>{
       status.textContent='That was my message for you. Now, let the Asake soundtrack begin. ♡';
       go('musicView');
