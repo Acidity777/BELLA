@@ -82,6 +82,19 @@
     .kids-result.show{display:block}.kids-result.error{border-color:rgba(243,166,186,.55);background:rgba(243,166,186,.08)}.kids-result.error h3{color:var(--rose)}.kids-result h3{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:500;color:var(--gold);margin:0 0 10px}.kids-result p{color:#f0dfe9;line-height:1.8;margin:0}
     @media(max-width:480px){.kids-options{grid-template-columns:repeat(3,minmax(0,1fr))}}
 
+
+    /* new interactive questions and magical extras */
+    .feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;max-width:900px;margin:25px auto}
+    .feature-card{display:block;text-align:left;padding:22px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025));color:var(--cream);transition:transform .2s,border-color .2s}
+    .feature-card:hover{transform:translateY(-3px);border-color:rgba(243,166,186,.6)}.feature-card .feature-icon{display:block;font-size:1.8rem;margin-bottom:10px}.feature-card strong{font:500 1.35rem 'Playfair Display',serif}.feature-card small{display:block;color:var(--muted);line-height:1.6;margin-top:7px}
+    .interactive-panel{max-width:800px;margin:25px auto;padding:clamp(22px,4vw,36px);border:1px solid rgba(243,166,186,.28);border-radius:26px;background:linear-gradient(145deg,rgba(243,166,186,.075),rgba(255,255,255,.025));text-align:left}
+    .quiz-question{padding:18px 0;border-bottom:1px solid var(--line)}.quiz-question:last-of-type{border-bottom:0}.quiz-question h3{font:500 1.35rem 'Playfair Display',serif;line-height:1.4;margin:0 0 13px}.answer-options{display:grid;gap:8px}.answer-option{border:1px solid var(--line);border-radius:13px;padding:12px 14px;background:rgba(255,255,255,.035);color:var(--cream);text-align:left;line-height:1.5}.answer-option:hover,.answer-option.selected{border-color:var(--rose);background:rgba(243,166,186,.12)}.answer-option.correct{border-color:var(--gold);background:rgba(232,197,138,.12)}.answer-option.incorrect{opacity:.75}.answer-feedback{display:none;color:var(--muted);line-height:1.7;margin:10px 0 0}.answer-feedback.show{display:block;animation:appear .4s ease both}.answer-feedback strong{color:var(--gold)}
+    .choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:22px 0}.choice-card{border:1px solid var(--line);border-radius:18px;padding:17px;background:rgba(255,255,255,.035);color:var(--cream);text-align:left;line-height:1.6;transition:.2s}.choice-card:hover{border-color:var(--rose);background:rgba(243,166,186,.1);transform:translateY(-2px)}.reveal-box{display:none;margin:20px 0 0;padding:20px;border-radius:18px;border:1px solid rgba(232,197,138,.35);background:rgba(232,197,138,.07);line-height:1.85;color:#f0dfe9}.reveal-box.show{display:block;animation:appear .5s ease both}.reveal-box h3{font:500 1.5rem 'Playfair Display',serif;color:var(--gold);margin:0 0 8px}
+    .constellation{position:relative;max-width:760px;min-height:300px;margin:28px auto;border:1px solid var(--line);border-radius:25px;overflow:hidden;background:radial-gradient(ellipse at 50% 50%,rgba(99,62,118,.3),transparent 65%),rgba(255,255,255,.025)}.constellation:before{content:'';position:absolute;inset:0;background-image:radial-gradient(1px 1px at 10% 25%,#fff 95%,transparent),radial-gradient(2px 2px at 70% 18%,#e8c58a 95%,transparent),radial-gradient(1px 1px at 83% 68%,#fff 95%,transparent),radial-gradient(1px 1px at 31% 79%,#f3a6ba 95%,transparent);opacity:.65}.constellation-star{position:absolute;z-index:1;border:0;background:transparent;color:var(--gold);font-size:2rem;filter:drop-shadow(0 0 10px rgba(232,197,138,.7));animation:twinkle 2.6s ease-in-out infinite}.constellation-star span{display:block;font: .68rem 'DM Sans',sans-serif;color:var(--muted);white-space:nowrap;margin-top:3px}.constellation-star:nth-child(even){animation-delay:.9s}@keyframes twinkle{50%{transform:scale(1.2);filter:drop-shadow(0 0 18px rgba(243,166,186,.9))}}
+    .wish-jar{width:180px;height:220px;margin:22px auto 28px;position:relative;border:3px solid rgba(232,197,138,.65);border-top:0;border-radius:25px 25px 42px 42px;background:linear-gradient(180deg,rgba(243,166,186,.13),rgba(232,197,138,.08));display:grid;place-items:center;box-shadow:inset 0 0 35px rgba(243,166,186,.1),0 0 35px rgba(232,197,138,.08);animation:jarFloat 4s ease-in-out infinite}.wish-jar:before{content:'';position:absolute;top:-13px;left:25px;right:25px;height:18px;border:2px solid rgba(232,197,138,.65);border-radius:7px;background:#37203a}.wish-jar span{font-size:4rem;filter:drop-shadow(0 0 14px rgba(243,166,186,.3))}@keyframes jarFloat{50%{transform:translateY(-6px)}}
+    .final-gift{font-size:5rem;display:inline-block;margin:18px 0;animation:pulse 2.5s ease-in-out infinite}.final-note{max-width:760px;margin:20px auto;padding:clamp(24px,5vw,45px);border:1px solid rgba(232,197,138,.35);border-radius:26px;background:rgba(255,255,255,.045);line-height:1.9;color:#f0dfe9}
+    @media(max-width:600px){.feature-grid,.choice-grid{grid-template-columns:1fr}.constellation{min-height:270px}.feature-card{padding:18px}}
+
   </style>
 </head>
 <body>
@@ -145,7 +158,7 @@
     </section>
 
     <section class="view" id="homeView">
-      <div class="wrap hero"><div class="hero-inner"><div class="orb">♡</div><div class="eyebrow">chapter 01 · the beginning</div><h1 class="title">For you, <em>Bella.</em></h1><p class="lead" style="margin:auto">You somehow found your way past all my walls, and this little corner of the internet is my way of making you smile. Take your time. There are a few things here I made just for you.</p><div class="actions"><button class="btn rose" onclick="go('voiceView')">Begin your little world ♡</button><button class="btn secondary" onclick="go('worldView')">Let me look around</button><button class="btn secondary" onclick="go('kidsView')">A playful question for us 💗</button></div><p class="fine" style="margin-top:26px">Made with thought, a little courage, and a whole lot of care.</p></div></div>
+      <div class="wrap hero"><div class="hero-inner"><div class="orb">♡</div><div class="eyebrow">chapter 01 · the beginning</div><h1 class="title">For you, <em>Bella.</em></h1><p class="lead" style="margin:auto">You somehow found your way past all my walls, and this little corner of the internet is my way of making you smile. Take your time. There are a few things here I made just for you.</p><div class="actions"><button class="btn rose" onclick="go('voiceView')">Begin your little world ♡</button><button class="btn secondary" onclick="go('worldView')">Let me look around</button><button class="btn secondary" onclick="go('kidsView')">A playful question for us 💗</button><button class="btn secondary" onclick="go('extrasView')">Discover hidden surprises ✨</button></div><p class="fine" style="margin-top:26px">Made with thought, a little courage, and a whole lot of care.</p></div></div>
     </section>
 
     <section class="view" id="voiceView">
@@ -159,7 +172,7 @@
         <article class="card"><div class="icon">✦</div><h3>A Little Wish</h3><p>I hope this next year brings you moments that make you proud of yourself, people who show up for you, and reasons to laugh when you least expect them.</p></article>
         <article class="card"><div class="icon">♡</div><h3>A Little Reminder</h3><p>Your confidence is one of the things I appreciate about you. You had the courage to approach someone who wasn't exactly making it easy, and you kept being yourself.</p></article>
         <article class="card"><div class="icon">☾</div><h3>A Little Secret</h3><p>I'm not always the easiest person to get close to. So the fact that you kept showing up, got to know me, and brought your energy into my world means more than I probably say.</p></article>
-      </div><div class="actions"><button class="btn rose" onclick="go('galleryView')">Visit the Bella Museum ↗</button><button class="btn secondary" onclick="go('surpriseView')">Find a little surprise</button></div></div>
+      </div><div class="actions"><button class="btn rose" onclick="go('galleryView')">Visit the Bella Museum ↗</button><button class="btn secondary" onclick="go('surpriseView')">Find a little surprise</button><button class="btn secondary" onclick="go('extrasView')">Explore hidden questions ✨</button></div></div>
     </section>
 
     <section class="view" id="galleryView">
@@ -186,7 +199,7 @@
     </section>
 
     <section class="view" id="distanceView">
-      <div class="wrap center"><div class="section-head"><div class="eyebrow">chapter 05 · until we meet</div><h1 class="title">Different places.<br><em>One little connection.</em></h1><p class="lead">Even when two people aren't in the same place, a kind message, a laugh, or a little effort can still travel a long way.</p></div><div class="night-map" aria-label="Two glowing points connected across a night sky"><span class="point one"></span><span class="point two"></span><span class="point-label one">Abuja ✦</span><span class="point-label two">Delta ♡</span><span class="travelling-heart">♡</span></div><div class="text-card"><p class="quote">“I hope one day we get to laugh about the little things in person — not just through a screen.”</p><p>Until then, let this page be one small reminder that distance doesn't have to make every moment feel far away.</p><button class="btn rose" type="button" onclick="openGift('A hug from Abuja to Delta 🫂','Imagine me giving you the kind of hug that says you do not have to find the perfect words or do anything at all. Just breathe, rest for a moment, and take this little hug from me. ❤️')">Send a little hug 🫂</button></div><div class="actions"><button class="btn rose" onclick="go('starsView')">Make a wish under the stars ✦</button></div></div>
+      <div class="wrap center"><div class="section-head"><div class="eyebrow">chapter 05 · until we meet</div><h1 class="title">Different places.<br><em>One little connection.</em></h1><p class="lead">Even when two people aren't in the same place, a kind message, a laugh, or a little effort can still travel a long way.</p></div><div class="night-map" aria-label="Two glowing points connected across a night sky"><span class="point one"></span><span class="point two"></span><span class="point-label one">Abuja ✦</span><span class="point-label two">Delta ♡</span><span class="travelling-heart">♡</span></div><div class="text-card"><p class="quote">“I hope one day we get to laugh about the little things in person — not just through a screen.”</p><p>Until then, let this page be one small reminder that distance doesn't have to make every moment feel far away.</p><button class="btn rose" type="button" id="distanceHugButton" onclick="revealDistanceHug()">Send a little hug 🫂</button><div class="reveal-box" id="distanceHugNote" style="text-align:center"><h3>Abuja to Delta 🫂❤️</h3><p>Imagine me giving you the warmest hug—the kind that says you don't have to find the perfect words or do anything at all. Just breathe, rest for a moment, and take this little hug from me. If I could be there right now, I'd give it to you in person. Until then, let this little piece of the internet carry it to you. ♡</p><div style="font-size:3rem;animation:hugFloat 2.5s ease-in-out infinite" aria-hidden="true">🫂💗</div></div></div><div class="actions"><button class="btn rose" onclick="go('starsView')">Make a wish under the stars ✦</button></div></div>
     </section>
 
     <section class="view" id="starsView">
@@ -208,8 +221,124 @@
         <div class="actions"><button class="btn rose" onclick="go('voiceView')">Hear my voice 🎙️</button><button class="btn secondary" onclick="go('homeView')">Back to our little world ↺</button></div></div>
     </section>
 
+
+    <section class="view" id="extrasView">
+      <div class="wrap center"><div class="section-head"><div class="eyebrow">little doors · just for you</div><h1 class="title">Choose your next <em>little adventure.</em></h1><p class="lead">Some questions, tiny wishes, and a little bit of magic are waiting here. Explore whichever one catches your eye, birthday girl. ❤️</p></div>
+        <div class="feature-grid">
+          <button class="feature-card" onclick="go('knowView')"><span class="feature-icon">🧠</span><strong>How Well Do You Know Me?</strong><small>Four playful questions about the person behind this website.</small></button>
+          <button class="feature-card" onclick="go('whatWouldView')"><span class="feature-icon">🫂</span><strong>What Would You Do?</strong><small>A little question about understanding someone on a difficult day.</small></button>
+          <button class="feature-card" onclick="go('askMeView')"><span class="feature-icon">💭</span><strong>If You Could Ask Me Anything…</strong><small>Pick a question and uncover an honest little answer.</small></button>
+          <button class="feature-card" onclick="go('futureView')"><span class="feature-icon">🌷</span><strong>A Wish for Your Future Self</strong><small>Choose what you hope your next chapter brings.</small></button>
+          <button class="feature-card" onclick="go('constellationView')"><span class="feature-icon">✨</span><strong>Constellation of Little Moments</strong><small>Tap the glowing stars to uncover hidden notes.</small></button>
+          <button class="feature-card" onclick="go('distanceView')"><span class="feature-icon">🫂</span><strong>A Hug From Afar</strong><small>One little hug travelling from Abuja to Delta.</small></button>
+          <button class="feature-card" onclick="go('wishJarView')"><span class="feature-icon">🫙</span><strong>The Birthday Wish Jar</strong><small>Draw a little wish whenever you need one.</small></button>
+          <button class="feature-card" onclick="go('finalView')"><span class="feature-icon">🎁</span><strong>The Final Surprise</strong><small>A last little note to close this birthday journey.</small></button>
+        </div>
+        <div class="actions"><button class="btn rose" onclick="go('letterView')">Open your letter 💌</button><button class="btn secondary" onclick="go('homeView')">Back home ↺</button></div>
+      </div>
+    </section>
+
+    <section class="view" id="knowView">
+      <div class="wrap"><div class="section-head center"><div class="eyebrow">question 01 · a little quiz</div><h1 class="title">How well do you <em>know me?</em></h1><p class="lead">Let's see how much you know about the mysterious human behind this website. 😂❤️ Just for fun—no pressure.</p></div>
+        <div class="interactive-panel">
+          <div class="quiz-question" data-q="0"><h3>1. What's my favourite way to spend a peaceful day?</h3><div class="answer-options"><button class="answer-option" onclick="answerKnow(this,0,0)">A. Outside, surrounded by people.</button><button class="answer-option" onclick="answerKnow(this,0,1)">B. Somewhere quiet, enjoying my own space.</button><button class="answer-option" onclick="answerKnow(this,0,2)">C. At a loud party.</button><button class="answer-option" onclick="answerKnow(this,0,3)">D. Travelling without a plan.</button></div><p class="answer-feedback" id="quizFeedback0"></p></div>
+          <div class="quiz-question" data-q="1"><h3>2. What's something I value more than people might realise?</h3><div class="answer-options"><button class="answer-option" onclick="answerKnow(this,1,0)">A. Fame and attention.</button><button class="answer-option" onclick="answerKnow(this,1,1)">B. Expensive things.</button><button class="answer-option" onclick="answerKnow(this,1,2)">C. Peace, sincerity, and the people who genuinely matter.</button><button class="answer-option" onclick="answerKnow(this,1,3)">D. Being the centre of attention.</button></div><p class="answer-feedback" id="quizFeedback1"></p></div>
+          <div class="quiz-question" data-q="2"><h3>3. When my mind gets crowded, what am I most likely to do?</h3><div class="answer-options"><button class="answer-option" onclick="answerKnow(this,2,0)">A. Talk everyone's ears off. 😂</button><button class="answer-option" onclick="answerKnow(this,2,1)">B. Go quiet and get lost in my thoughts.</button><button class="answer-option" onclick="answerKnow(this,2,2)">C. Start an argument for fun.</button><button class="answer-option" onclick="answerKnow(this,2,3)">D. Pretend I'm a professional comedian.</button></div><p class="answer-feedback" id="quizFeedback2"></p></div>
+          <div class="quiz-question" data-q="3"><h3>4. What's one thing I'm trying to become better at?</h3><div class="answer-options"><button class="answer-option" onclick="answerKnow(this,3,0)">A. Communicating what I feel.</button><button class="answer-option" onclick="answerKnow(this,3,1)">B. Avoiding everyone forever.</button><button class="answer-option" onclick="answerKnow(this,3,2)">C. Winning every argument.</button><button class="answer-option" onclick="answerKnow(this,3,3)">D. Becoming a professional sleeper.</button></div><p class="answer-feedback" id="quizFeedback3"></p></div>
+          <div class="reveal-box" id="quizFinal"><h3>Maybe you know me more than you think. ❤️</h3><p id="quizFinalText">There's still a lot of me I'm learning to understand, too. Thank you for taking a little time to look beyond the surface.</p></div>
+        </div><div class="actions"><button class="btn rose" onclick="go('whatWouldView')">Next question ↗</button><button class="btn secondary" onclick="go('extrasView')">All the little adventures</button></div>
+      </div>
+    </section>
+
+    <section class="view" id="whatWouldView">
+      <div class="wrap center"><div class="section-head"><div class="eyebrow">question 02 · understanding</div><h1 class="title">What would <em>you do?</em></h1><p class="lead">Imagine I had one of those days when my mind was crowded, and I didn't quite know how to explain what I was feeling. What would you do?</p></div>
+        <div class="interactive-panel"><div class="choice-grid">
+          <button class="choice-card" onclick="answerWould(0)"><strong>A. Give me space.</strong><br>But remind me you're still there.</button>
+          <button class="choice-card" onclick="answerWould(1)"><strong>B. Keep asking.</strong><br>Try to get me to explain everything.</button>
+          <button class="choice-card" onclick="answerWould(2)"><strong>C. Make me laugh.</strong><br>Send something funny to brighten the day.</button>
+          <button class="choice-card" onclick="answerWould(3)"><strong>D. Sit beside me quietly.</strong><br>Even if neither of us says much.</button>
+        </div><div class="reveal-box" id="wouldResult"><h3 id="wouldTitle">A little thought ❤️</h3><p id="wouldText"></p></div><p class="fine">There's no wrong answer here. People show care in different ways, and this is just a little imagination game.</p></div>
+        <div class="actions"><button class="btn rose" onclick="go('askMeView')">Next question ↗</button><button class="btn secondary" onclick="go('extrasView')">All the little adventures</button></div>
+      </div>
+    </section>
+
+    <section class="view" id="askMeView">
+      <div class="wrap center"><div class="section-head"><div class="eyebrow">question 03 · the honest corner</div><h1 class="title">If you could ask me <em>anything…</em></h1><p class="lead">Birthday girl, the microphone is yours. 😂❤️ If you could ask me one question and know I'd answer it honestly, what would you ask?</p></div>
+        <div class="interactive-panel"><div class="choice-grid">
+          <button class="choice-card" onclick="answerAsk(0)"><strong>A. What do you wish I understood about you?</strong></button>
+          <button class="choice-card" onclick="answerAsk(1)"><strong>B. What's your favourite memory of us?</strong></button>
+          <button class="choice-card" onclick="answerAsk(2)"><strong>C. What's something you've always wanted to tell me?</strong></button>
+        </div><div class="reveal-box" id="askResult"><h3 id="askTitle">A little honesty ❤️</h3><p id="askText"></p></div><p class="fine">This is an on-screen experience, so your selection stays on this page; it doesn't send an answer to me automatically.</p></div>
+        <div class="actions"><button class="btn rose" onclick="go('futureView')">A wish for your future ↗</button><button class="btn secondary" onclick="go('extrasView')">All the little adventures</button></div>
+      </div>
+    </section>
+
+    <section class="view" id="futureView">
+      <div class="wrap center"><div class="section-head"><div class="eyebrow">question 04 · your next chapter</div><h1 class="title">A wish for your <em>future self.</em></h1><p class="lead">Imagine you could open a letter from yourself one year from today. What would you hope that version of you would say?</p></div>
+        <div class="interactive-panel"><div class="choice-grid">
+          <button class="choice-card" onclick="chooseFuture(0)"><strong>A. I became happier and more at peace.</strong></button>
+          <button class="choice-card" onclick="chooseFuture(1)"><strong>B. I achieved something I once thought impossible.</strong></button>
+          <button class="choice-card" onclick="chooseFuture(2)"><strong>C. I learned to love myself more.</strong></button>
+          <button class="choice-card" onclick="chooseFuture(3)"><strong>D. I found beautiful reasons to keep smiling.</strong></button>
+        </div><div class="reveal-box" id="futureResult"><h3>A wish for you, Bella 🌷</h3><p id="futureText"></p></div></div>
+        <div class="actions"><button class="btn rose" onclick="go('constellationView')">Follow the stars ✨</button><button class="btn secondary" onclick="go('extrasView')">All the little adventures</button></div>
+      </div>
+    </section>
+
+    <section class="view" id="constellationView">
+      <div class="wrap center"><div class="section-head"><div class="eyebrow">a little magic · hidden notes</div><h1 class="title">A constellation of <em>little moments.</em></h1><p class="lead">Tap each glowing star to uncover a tiny message. Every light is holding a wish just for you. ✨</p></div>
+        <div class="constellation" aria-label="Interactive constellation of hidden birthday wishes">
+          <button class="constellation-star" style="left:12%;top:18%" onclick="openGift('A little reminder','Bella, you deserve kindness on ordinary days, not just birthdays. ♡')">✦<span>a reminder</span></button>
+          <button class="constellation-star" style="left:42%;top:13%" onclick="openGift('A wish for peace','May you find the kind of peace that lets you breathe, rest, and be completely yourself. 🌙')">✧<span>for peace</span></button>
+          <button class="constellation-star" style="right:13%;top:28%" onclick="openGift('A little appreciation','Your confidence and the energy you bring are part of what makes you unmistakably you. Keep that light. ❤️')">✦<span>for you</span></button>
+          <button class="constellation-star" style="left:22%;bottom:19%" onclick="openGift('A wish for courage','I hope you keep believing in yourself, even when the next step feels uncertain. 🌷')">✧<span>for courage</span></button>
+          <button class="constellation-star" style="right:22%;bottom:16%" onclick="openGift('A wish for joy','May life keep surprising you with genuine laughter, good people, and moments worth remembering. ✨')">✦<span>for joy</span></button>
+        </div><div class="actions"><button class="btn rose" onclick="go('wishJarView')">Draw a birthday wish 🫙</button><button class="btn secondary" onclick="go('extrasView')">All the little adventures</button></div>
+      </div>
+    </section>
+
+    <section class="view" id="wishJarView">
+      <div class="wrap center"><div class="section-head"><div class="eyebrow">a jar full of good wishes</div><h1 class="title">The birthday <em>wish jar.</em></h1><p class="lead">Whenever you want a little reminder, tap the jar and draw a wish for your new year. 🌷</p></div>
+        <div class="wish-jar" aria-hidden="true"><span>🫙</span></div><button class="btn rose" onclick="drawWish()">Draw a little wish ♡</button><div class="reveal-box" id="wishResult" style="max-width:680px;margin:24px auto"><h3>A wish for Bella ✨</h3><p id="wishText"></p></div>
+        <div class="actions"><button class="btn rose" onclick="go('finalView')">One final surprise 🎁</button><button class="btn secondary" onclick="go('extrasView')">All the little adventures</button></div>
+      </div>
+    </section>
+
+    <section class="view" id="finalView">
+      <div class="wrap center"><div class="section-head"><div class="eyebrow">the final little door</div><h1 class="title">One last thing, <em>Bella.</em></h1><p class="lead">You made it to the end of this little universe. Here's one last note for you. ❤️</p></div>
+        <div class="final-gift" aria-hidden="true">🎁</div><div class="final-note"><p class="quote">“And that's the little universe I made for you, Bella.”</p><p>Every word, every detail, every silly little interaction was put together with you in mind. I hope it made you smile, even if only for a moment.</p><p>May God bless this new chapter of your life, guide your steps, protect your heart, and fill your days with peace, genuine happiness, and people who treat you with care. May you always find reasons to smile, even when life feels heavy. ❤️</p><p>Happy birthday once again, Bella. Thank you for finding your way into my world. ♡</p></div>
+        <div class="actions"><button class="btn rose" onclick="go('letterView')">Read your letter again 💌</button><button class="btn secondary" onclick="go('homeView')">Start the journey again ↺</button></div>
+      </div>
+    </section>
+
     <section class="view" id="letterView">
-      <div class="wrap center"><div class="section-head"><div class="eyebrow">chapter 07 · the final letter</div><h1 class="title">A letter, just <em>for you.</em></h1><p class="lead">This is the last little door. Open it when you're ready.</p></div><div class="envelope-wrap"><button class="envelope" id="envelope" onclick="toggleLetter()" aria-label="Open the birthday letter"><span class="envelope-label">For Bella, with care ♡</span></button></div><article class="letter-content" id="letterContent"><h3>Dear Bella,</h3><p>Happy birthday, Bella. ♡</p><p>I wanted to make you something that felt like you deserved a little time and thought — something you could open, explore, smile at, and maybe come back to whenever you feel like it.</p><p>One thing I genuinely appreciate about you is your confidence. And your energy towards me, honestly. It isn't easy getting through to me. I know I can be rude, and I know some of my replies before we became friends probably didn't make it easy for you. You had been noticing me since March, and somehow, around May or June, you found a way for us to actually get to know each other.</p><p>That takes a kind of boldness I respect. You didn't have to keep trying to know someone who wasn't exactly making the door easy to open, but you did. And I'm glad you did. I might not always be the best at saying things in the moment, but I do notice your effort, your confidence, and the energy you bring when you're talking to me.</p><p>I hope this new year of your life brings you reasons to be proud of yourself, people who meet your effort with their own, beautiful memories, and the kind of happiness that stays even after the birthday candles are gone. I hope you keep being confidently, wonderfully you.</p><p>And if this little website makes you smile even once, then it has already done what I hoped it would do. I made it because I wanted to give you something personal — not because it had to be expensive or perfect, but because you matter enough for me to try.</p><p>Happy birthday, Bella. Keep your confidence. Keep your energy. Keep being you. And thank you for finding your way into my world. ♡</p><p style="color:var(--gold);font-family:'Playfair Display',serif;font-size:1.4rem">— from me, with care. ♡</p><p class="fine">We'll keep shaping this letter together. If there's a detail you want to add, change, or make more emotional, tell Ace and we'll make it sound like you.</p></article><div class="actions"><button class="btn rose" onclick="go('musicView')">Stay a little longer · play the music 🎧</button><button class="btn secondary" onclick="go('homeView')">Start the journey again ↺</button></div></div>
+      <div class="wrap center"><div class="section-head"><div class="eyebrow">chapter 07 · the final letter</div><h1 class="title">A letter, just <em>for you.</em></h1><p class="lead">This is the last little door. Open it when you're ready.</p></div><div class="envelope-wrap"><button class="envelope" id="envelope" onclick="toggleLetter()" aria-label="Open the birthday letter"><span class="envelope-label">For Bella, with care ♡</span></button></div><article class="letter-content" id="letterContent">
+          <h3>For Bella, with care ♡</h3>
+          <p>Some things are easier to write than to say out loud.</p>
+          <p>Bella, ❤️</p>
+          <p>There are things I've wanted to tell you, little things I've struggled to explain, and feelings that sometimes get lost between what I think and what I actually say. I couldn't fit everything into a simple birthday wish, so I left you something here. No rush. No expectations. Just a little piece of my heart, written especially for you.</p>
+          <p>To the girl I never expected to mean this much to me, Bella. ❤️</p>
+          <p>Sometimes I wonder if you ever truly understood me.</p>
+          <p>Not because you didn’t try—you probably deserve an award for patience at this point—and not because I expected you to read my mind. Truth is, there are parts of me that I still struggle to explain, even to myself.</p>
+          <p>Sometimes I go quiet when I actually have a million things to say. Sometimes I reply in ways that make it seem like I don’t care, when the reality is that I care far more than I know how to express. (I promise I’m working on not sounding like an automated response system when my mind gets crowded). I get lost in my own thoughts, trying to navigate feelings that don’t come with a manual.</p>
+          <p>And I know how that looks from your side.</p>
+          <p>You might wonder why someone who says you matter can sometimes act like you’re miles away. You might question whether you actually mean as much to me as I say you do.</p>
+          <p>If I could give you a temporary pass into my brain for just five minutes, I would. Not so you’d excuse every mistake I make, but so you could see that what shows on the outside rarely tells the full story of what’s happening in here.</p>
+          <p>I never wanted my own internal chaos to make you question your worth in my life. Not even for a second.</p>
+          <p>You deserve to feel appreciated. You deserve to feel heard. You deserve to know—without a single doubt—that your presence matters.</p>
+          <p>I’m learning that caring for someone isn’t just about what you feel quietly in your heart; it’s about what that person actually experiences through your actions. I’m still figuring that out. I’m still figuring myself out.</p>
+          <p>But Bella, if there’s one thing I never want you to misunderstand, it’s this: just because I don’t always know how to show what I feel, doesn’t mean a single moment we shared was empty.</p>
+          <p>You walked into my world completely unannounced, and honestly? You completely threw off my schedule. Out of all the people in this world, our paths crossed—and even on my most quiet days, I think about how wild and special that is.</p>
+          <p>I don’t know what the future holds for us. I don’t know what goes through your mind when you think of me these days, and I won’t pretend to have all the answers.</p>
+          <p>But I know that meeting you became a massive, unforgettable chapter of my story, and I will never act like it didn't mean everything.</p>
+          <p>If there’s one thing I wish for you in this new year of your life, it’s that life gives you reasons to smile—especially on the heavy days when nobody knows you’re struggling. I hope you find the kind of peace that lets you rest without having to pretend you’re okay. And please, keep that confidence and those beautiful parts of yourself that make you you (even the parts that used to drive me crazy).</p>
+          <p>On your birthday, I hope you feel deeply loved—not because of big promises, but because you genuinely deserve kindness, warmth, and every single sweet thing life has to offer.</p>
+          <p>Happy Birthday, Bella. ❤️</p>
+          <p>Whatever tomorrow brings, I hope you never forget that you mattered immensely to someone who was still learning how to understand himself.</p>
+          <p>I love you, Bella. I love you, and I’ll always love you—no matter where life takes us.</p>
+          <p>And honestly... maybe that’s the part I wish I had learned to say out loud sooner.</p>
+          <p class="fine" style="text-align:center;color:var(--gold);margin-top:24px">Some feelings deserve to be written down, even when they’re difficult to say. ♡</p>
+        </article><div class="actions"><button class="btn rose" onclick="go('musicView')">Stay a little longer · play the music 🎧</button><button class="btn secondary" onclick="go('homeView')">Start the journey again ↺</button></div></div>
     </section>
 
     <section class="view" id="musicView">
@@ -289,6 +418,63 @@
   document.getElementById('laughterStar').addEventListener('click',function(){
     openGift('Star 06 · laughter','Bella, may life give you so many beautiful reasons to laugh that even the difficult days do not get the final word. May your laughter be genuine, your happiness be lasting, and your heart always find little reasons to smile. 🌷❤️');
   });
+
+  const quizAnswers = [1,2,1,0];
+  const quizResponses = [
+    'You got it! Quiet time and personal space are often where I feel most like myself. ♡',
+    'Exactly. Peace, sincerity, and the people who genuinely matter mean more than attention. ❤️',
+    'You know this one 😂 Sometimes I go quiet when my mind gets crowded, even if there is a lot I wish I could explain.',
+    'Yes. I am learning that caring also means helping people understand what I feel through my words and actions. ♡'
+  ];
+  const quizAnswered = new Set();
+  function answerKnow(button, question, choice){
+    const group=button.closest('.quiz-question');
+    if(!group || quizAnswered.has(question)) return;
+    quizAnswered.add(question);
+    group.querySelectorAll('.answer-option').forEach((b,i)=>{b.disabled=true;if(i===quizAnswers[question])b.classList.add('correct');else if(i===choice)b.classList.add('incorrect');});
+    const feedback=document.getElementById('quizFeedback'+question);
+    feedback.textContent=(choice===quizAnswers[question]?'You got it. ':'A little miss, but no worries. ')+quizResponses[question];
+    feedback.classList.add('show');
+    if(quizAnswered.size===4){document.getElementById('quizFinal').classList.add('show');showToast('You finished the little quiz, Bella! ❤️');}
+  }
+  function revealDistanceHug(){const note=document.getElementById('distanceHugNote');note.classList.add('show');document.getElementById('distanceHugButton').textContent='Your little hug is here ♡';setTimeout(()=>note.scrollIntoView({behavior:'smooth',block:'center'}),100);}
+  function answerWould(choice){
+    const answers=[
+      ['Space can be caring, too. ❤️','Sometimes, what matters most is knowing someone is still there without being forced to explain everything.'],
+      ['Your concern would be clear. 💗','Questions can come from love, though sometimes a person needs time to find the words. A little patience can make that easier.'],
+      ['A laugh can lighten a heavy day. 😂❤️','Sometimes a small silly moment is a reminder that a difficult day is not the whole story.'],
+      ['Quiet company can mean a lot. 🫂','Sometimes, being understood does not require perfect words. Sometimes, having someone beside you is enough.']
+    ];
+    document.getElementById('wouldTitle').textContent=answers[choice][0];document.getElementById('wouldText').textContent=answers[choice][1];document.getElementById('wouldResult').classList.add('show');
+  }
+  function answerAsk(choice){
+    const answers=[
+      ['What I wish you understood ❤️','That sometimes my silence says more about the things I am struggling to understand within myself than it says about how much someone means to me. I am still learning how to let people see what is happening inside my head.'],
+      ['A memory worth keeping ♡','One of my favourite parts is the fact that our paths crossed at all. You came into my world unexpectedly, and somehow, getting to know you became a chapter I will remember.'],
+      ['Something I wanted to say 💌','You matter to me more than I always know how to express. I am still learning to make my care clearer through my actions, not just the feelings I keep quietly inside.']
+    ];
+    document.getElementById('askTitle').textContent=answers[choice][0];document.getElementById('askText').textContent=answers[choice][1];document.getElementById('askResult').classList.add('show');
+  }
+  function chooseFuture(choice){
+    const lines=[
+      'Whatever this next chapter brings, Bella, I hope the woman you become is proud of the girl you are today. May God grant you peace, protect your heart, bless your efforts, and fill your new year with goodness. Amen. ❤️',
+      'I hope you look back and realise that every small brave step added up. May God guide your efforts, open good doors for you, and give you the courage to keep going. Amen. 🌷',
+      'I hope you learn to speak to yourself with patience, recognise your own worth, and never feel you have to become smaller to be loved. May God surround you with kindness and peace. Amen. ❤️',
+      'I hope you find beautiful reasons to smile in the big moments and the ordinary ones. May God bless your days with hope, laughter, and people who bring goodness into your life. Amen. ✨'
+    ];
+    document.getElementById('futureText').textContent=lines[choice];document.getElementById('futureResult').classList.add('show');
+  }
+  const birthdayWishes=[
+    'May God make the things that weigh on your heart feel lighter, and may you always find a safe place to rest. ❤️',
+    'May your efforts bring results that make you proud, and may the doors meant for you open at the right time. ✨',
+    'May you find peace in places where you once felt uncertain, and courage for every new beginning. 🌷',
+    'May you never forget your worth on the days you feel less than enough. You deserve kindness on ordinary days, too. ♡',
+    'May this new chapter bring unexpected happiness, genuine friendships, laughter, and memories you will love looking back on. 💗',
+    'May God protect you, guide your steps, strengthen you when life feels heavy, and give you many reasons to be grateful. Amen. ❤️'
+  ];
+  let lastWishIndex=-1;
+  function drawWish(){let i=Math.floor(Math.random()*birthdayWishes.length);if(birthdayWishes.length>1&&i===lastWishIndex)i=(i+1)%birthdayWishes.length;lastWishIndex=i;document.getElementById('wishText').textContent=birthdayWishes[i];document.getElementById('wishResult').classList.add('show');}
+
   function toggleLetter(){const e=document.getElementById('envelope');const c=document.getElementById('letterContent');e.classList.toggle('open');c.classList.toggle('show');if(c.classList.contains('show'))setTimeout(()=>c.scrollIntoView({behavior:'smooth',block:'start'}),180)}
   function loadTrack(button,autoplay){
     document.querySelectorAll('.track').forEach(t=>t.classList.toggle('active',t===button));
@@ -303,7 +489,7 @@
     const status=document.getElementById('voiceStatus');
     if(a.dataset.listenersAttached==='1')return;
     a.dataset.listenersAttached='1';
-    a.addEventListener('error',()=>{status.textContent='The voice-note file could not be loaded. Check that bella.mp4 is uploaded and committed either inside the assets folder (assets/bella.mp4) or in the repository root (bella.mp4). The name must match exactly. ♡'},{once:true});
+    a.addEventListener('error',()=>{status.textContent='The voice-note file could not be loaded. Check that bella.m4a is uploaded and committed either inside the assets folder (assets/bella.m4a) or in the repository root (bella.m4a). The name must match exactly. ♡'},{once:true});
     a.addEventListener('loadedmetadata',()=>{status.textContent='Your voice note is ready. Tap play to hear my message first. When it finishes, the Asake soundtrack will open next. ♡'},{once:true});
     a.addEventListener('ended',()=>{
       status.textContent='That was my message for you. Now, let the Asake soundtrack begin. ♡';
