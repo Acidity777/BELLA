@@ -37,7 +37,11 @@
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
 
     /* birthday celebration screen */
-    .birthday-stage{position:relative;max-width:850px;padding:clamp(22px,4vw,42px) 0 12px;overflow:hidden}
+    .birthday-stage{position:relative;max-width:850px;padding:clamp(22px,4vw,42px) 0 12px;overflow:hidden;isolation:isolate}
+    .star-rain{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+    .rain-star{position:absolute;top:-35px;color:var(--gold);text-shadow:0 0 12px rgba(232,197,138,.8);opacity:0;animation:starFall var(--fall-duration,5s) linear forwards;will-change:transform,opacity}
+    .birthday-stage>*:not(.star-rain){position:relative;z-index:1}
+    @keyframes starFall{0%{transform:translate3d(0,-20px,0) rotate(0deg) scale(.65);opacity:0}12%{opacity:.9}75%{opacity:.7}100%{transform:translate3d(var(--drift,30px),110vh,0) rotate(240deg) scale(1.05);opacity:0}}
     .birthday-eyebrow{animation:birthdayFadeIn 1s .1s both}
     .birthday-heading{display:flex;flex-direction:column;align-items:center;margin:24px 0 18px;font-family:'Playfair Display',serif;font-weight:500;line-height:1.03;letter-spacing:-.045em}
     .birthday-line{display:block;opacity:0;animation:birthdayWordReveal .9s ease forwards}
@@ -69,7 +73,7 @@
     @keyframes sparkleFloat{0%,100%{transform:translateY(0) rotate(0);opacity:.5}50%{transform:translateY(-12px) rotate(18deg);opacity:1}}
     @keyframes enterGlow{0%,100%{box-shadow:0 9px 30px rgba(243,166,186,.12)}50%{box-shadow:0 10px 38px rgba(243,166,186,.32)}}
     @media(max-width:480px){.birthday-stage{padding-top:16px}.hug-scene{height:235px}.hug-heart{width:135px;height:135px}.hug-emoji{font-size:4.4rem}.sparkle-one{left:3%}.sparkle-two{right:3%}.sparkle-three{right:1%}.birthday-message{padding:22px 18px}}
-    @media(prefers-reduced-motion:reduce){.birthday-line,.birthday-subtitle,.hug-scene,.birthday-eyebrow{opacity:1;animation:none}.hug-heart,.hug-glow,.orbit-heart,.birthday-sparkle,.birthday-enter{animation:none}}
+    @media(prefers-reduced-motion:reduce){.birthday-line,.birthday-subtitle,.hug-scene,.birthday-eyebrow{opacity:1;animation:none}.hug-heart,.hug-glow,.orbit-heart,.birthday-sparkle,.birthday-enter,.rain-star{animation:none!important;opacity:.35}.rain-star{display:none}}
 
 
     /* playful future question */
@@ -124,6 +128,7 @@
     <!-- BIRTHDAY CELEBRATION: the first screen Bella sees after the countdown unlocks -->
     <section class="view" id="birthdayView">
       <div class="wrap center birthday-stage">
+        <div class="star-rain" id="birthdayStarRain" aria-hidden="true"></div>
         <div class="eyebrow birthday-eyebrow">today is all about you</div>
         <div class="birthday-sparkle sparkle-one" aria-hidden="true">✦</div>
         <div class="birthday-sparkle sparkle-two" aria-hidden="true">✧</div>
@@ -359,9 +364,36 @@
   // Add ?preview=1 to the URL while testing; the normal shared URL stays locked until birthday.
   let unlocked = new URLSearchParams(window.location.search).get('preview') === '1';
   const views = [...document.querySelectorAll('.view')];
+  let birthdayRainTimer = null;
+  function startBirthdayStarRain(){
+    const layer=document.getElementById('birthdayStarRain');
+    if(!layer || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if(birthdayRainTimer) clearInterval(birthdayRainTimer);
+    layer.replaceChildren();
+    const symbols=['✦','✧','⋆','✶','♡'];
+    const dropStar=()=>{
+      if(!document.getElementById('birthdayView').classList.contains('active')) return;
+      for(let i=0;i<2;i++){
+        const star=document.createElement('span');
+        star.className='rain-star';
+        star.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+        star.style.left=(Math.random()*100)+'%';
+        star.style.fontSize=(10+Math.random()*17)+'px';
+        star.style.setProperty('--fall-duration',(4+Math.random()*3)+'s');
+        star.style.setProperty('--drift',((Math.random()*100)-50)+'px');
+        star.style.animationDelay=(Math.random()*.5)+'s';
+        layer.appendChild(star);
+        star.addEventListener('animationend',()=>star.remove(),{once:true});
+      }
+    };
+    dropStar();
+    birthdayRainTimer=setInterval(dropStar,420);
+  }
+  function stopBirthdayStarRain(){if(birthdayRainTimer){clearInterval(birthdayRainTimer);birthdayRainTimer=null;}}
   function go(id){
     if(!unlocked && id!=='lockView'){ showToast('Just a little longer, Bella. Your world unlocks on 19 October. ♡'); return; }
     views.forEach(v=>v.classList.toggle('active',v.id===id));
+    if(id==='birthdayView') startBirthdayStarRain(); else stopBirthdayStarRain();
     document.querySelectorAll('.chapter-nav button').forEach(b=>b.classList.toggle('current',b.dataset.target===id));
     window.scrollTo({top:0,behavior:'smooth'});
     if(id==='voiceView') checkVoiceNote();
